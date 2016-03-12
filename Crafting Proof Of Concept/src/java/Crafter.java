@@ -12,7 +12,7 @@ public class Crafter {
     public String craft(String input) {
         String[] data = input.split(" ");
         int successRoll = 1+(int)(Math.random()*20);
-        if (successRoll==0)
+        if (successRoll==1)
             return "Crit Fail";
         String result=""+data[2];
         int wis = Integer.parseInt(data[3]);

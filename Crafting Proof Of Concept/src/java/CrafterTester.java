@@ -11,6 +11,6 @@
 public class CrafterTester {
     public static void main(String[] args) {
         Crafter lisbeth = new Crafter();
-        System.out.println(lisbeth.craft("Divine 10 OHS 20"));
+        System.out.println(lisbeth.craft("Divine 10 THAS 20"));
     }
 }
