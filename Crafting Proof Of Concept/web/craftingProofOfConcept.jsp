@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : craftingProofOfConcept
     Created on : Feb 27, 2016, 10:44:21 PM
     Author     : SpudManTwo
@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:useBean id="lisbeth" class="proof.Crafter" scope="session"/>
+<jsp:setProperty name="lisbeth" property="*" />
+<%@page import="proof.Crafter"%> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,9 +62,15 @@
                 <td>Two Handed Assault Spear</td>
             </tr>        
         </table>
-        <form method="post" action="CraftResults.jsp">
-        <input type="text" name="data"></input><br>
-        <input type="submit"></input>
+        <form Method="POST" action="Crafted.jsp">
+        <input type="text" name="craftInput"></input><br>
+        <input type="Submit">
         </form>
+        <script>
+            function refreshPage() {
+                window.location.reload();
+            }
+        </script>
+        
     </body>
 </html>

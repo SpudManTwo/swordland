@@ -1,3 +1,4 @@
+package proof;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,8 +10,17 @@
  * @author SpudManTwo
  */
 public class Crafter {
-    public String craft(String input) {
-        String[] data = input.split(" ");
+    String craftInput;
+    public Crafter() {
+        craftInput = "";
+    }
+    public void setcraftInput(String value) {
+        craftInput = value;
+    }
+    public String getCraft() {
+        if (craftInput.equals(""))
+            return "";
+        String[] data = craftInput.split(" ");
         int successRoll = 1+(int)(Math.random()*20);
         if (successRoll==1)
             return "Crit Fail";

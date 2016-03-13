@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import proof.Crafter;
 
 public final class craftingProofOfConcept_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -45,6 +46,18 @@ public final class craftingProofOfConcept_jsp extends org.apache.jasper.runtime.
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
+      proof.Crafter lisbeth = null;
+      synchronized (session) {
+        lisbeth = (proof.Crafter) _jspx_page_context.getAttribute("lisbeth", PageContext.SESSION_SCOPE);
+        if (lisbeth == null){
+          lisbeth = new proof.Crafter();
+          _jspx_page_context.setAttribute("lisbeth", lisbeth, PageContext.SESSION_SCOPE);
+        }
+      }
+      out.write('\n');
+      org.apache.jasper.runtime.JspRuntimeLibrary.introspect(_jspx_page_context.findAttribute("lisbeth"), request);
+      out.write("\n");
+      out.write(" \n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
@@ -98,10 +111,16 @@ public final class craftingProofOfConcept_jsp extends org.apache.jasper.runtime.
       out.write("                <td>Two Handed Assault Spear</td>\n");
       out.write("            </tr>        \n");
       out.write("        </table>\n");
-      out.write("        <form method=\"post\" action=\"CraftResults.jsp\">\n");
-      out.write("        <input type=\"text\" name=\"data\"></input><br>\n");
-      out.write("        <input type=\"submit\"></input>\n");
+      out.write("        <form Method=\"POST\" action=\"Crafted.jsp\">\n");
+      out.write("        <input type=\"text\" name=\"craftInput\"></input><br>\n");
+      out.write("        <input type=\"Submit\">\n");
       out.write("        </form>\n");
+      out.write("        <script>\n");
+      out.write("            function refreshPage() {\n");
+      out.write("                window.location.reload();\n");
+      out.write("            }\n");
+      out.write("        </script>\n");
+      out.write("        \n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

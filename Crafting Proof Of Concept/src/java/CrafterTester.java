@@ -1,3 +1,6 @@
+
+import proof.Crafter;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +14,7 @@
 public class CrafterTester {
     public static void main(String[] args) {
         Crafter lisbeth = new Crafter();
-        System.out.println(lisbeth.craft("Divine 10 THAS 20"));
+        lisbeth.setInput("Iron 8 OHD 17");
+        System.out.println(lisbeth.getCraft());
     }
 }
