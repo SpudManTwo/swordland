@@ -7,8 +7,6 @@ package net.swordland;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import net.swordland.enums.Fingers;
-import net.swordland.enums.Hands;
 
 /**
  * Describes the inventory of a player.
@@ -65,33 +63,33 @@ public class Inventory
         return currentWeapon;
     }
 
-    public Weapon getCurrentWeapon(Hands hand) 
+    public Weapon getCurrentWeapon(int hand) 
     {
-        return currentWeapon[hand.hands()];
+        return currentWeapon[hand];
     }
 
-    public boolean equipWeapon(Weapon weapon, Hands hand) 
+    public boolean equipWeapon(Weapon weapon, int hand) 
     {
         if (currentItems.contains(weapon) == false) 
         {
             return false;
         }  
-        if (this.currentWeapon[hand.hands()] !=  null)
+        if (this.currentWeapon[hand] !=  null)
         {
-            this.currentItems.add(this.currentWeapon[hand.hands()]);
+            this.currentItems.add(this.currentWeapon[hand]);
         }
-        this.currentWeapon[hand.hands()] = weapon;
+        this.currentWeapon[hand] = weapon;
         return this.currentItems.remove(weapon);
     }
 
-    public boolean unequipWeapon(Hands hand) 
+    public boolean unequipWeapon(int hand) 
     {
-        if (this.currentWeapon[hand.hands()] ==  null)
+        if (this.currentWeapon[hand] ==  null)
         {
             return false;
         }
-        Weapon old = this.currentWeapon[hand.hands()];
-        this.currentWeapon[hand.hands()] = null;
+        Weapon old = this.currentWeapon[hand];
+        this.currentWeapon[hand] = null;
         return this.currentItems.add(old);
     }
 
@@ -130,33 +128,33 @@ public class Inventory
         return currentRings;
     }
 
-    public Ring getRing(Fingers finger) 
+    public Ring getRing(int finger) 
     {
-        return currentRings[finger.Finger()];
+        return currentRings[finger];
     }
 
-    public boolean equipRing(Ring ring, Fingers finger) 
+    public boolean equipRing(Ring ring, int finger) 
     {
         if (currentItems.contains(ring) == false) 
         { 
             return false; 
         } 
-        if (this.currentRings[finger.Finger()] != null) 
+        if (this.currentRings[finger] != null) 
         { 
-            this.currentItems.add(this.currentRings[finger.Finger()]); 
+            this.currentItems.add(this.currentRings[finger]); 
         }
-        this.currentRings[finger.Finger()] = ring;
+        this.currentRings[finger] = ring;
         return this.currentItems.remove(ring);
     }
 
-    public boolean unequipRing(Fingers finger) 
+    public boolean unequipRing(int finger) 
     {
-        if (this.currentRings[finger.Finger()] ==  null)
+        if (this.currentRings[finger] ==  null)
         {
             return false;
         }
-        Ring old = this.currentRings[finger.Finger()];
-        this.currentRings[finger.Finger()] = null;
+        Ring old = this.currentRings[finger];
+        this.currentRings[finger] = null;
         return this.currentItems.add(old);
     }
 

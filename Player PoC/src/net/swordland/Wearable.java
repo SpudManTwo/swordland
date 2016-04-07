@@ -47,16 +47,6 @@ class Wearable extends Item
     }
 
     /**
-     * Set the value of maxDurability
-     *
-     * @param maxDurability new value of maxDurability
-     */
-    public void setMaxDurability(int maxDurability) 
-    {
-        this.maxDurability = maxDurability;
-    }
-
-    /**
      * Get the value of currDurability
      *
      * @return the value of currDurability
@@ -84,14 +74,4 @@ class Wearable extends Item
     public Material getMaterial() {
         return material;
     }
-
-    /**
-     * Set the value of material
-     *
-     * @param material new value of material
-     */
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
 }

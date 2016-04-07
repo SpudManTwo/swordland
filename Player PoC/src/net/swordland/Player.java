@@ -84,8 +84,7 @@ public class Player
         for (Item i : this.inventory.getCurrentItems())
         {
             this.weight += i.getWeight();
-        }
-        
+        }        
     }
     
     public Player(String name)
@@ -291,6 +290,14 @@ public class Player
     public void registerPlayerInventory()
     {
         this.inventory.setPlayer(this);
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public int getWeight() {
+        return weight;
     }
     
     public void Die()

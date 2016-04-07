@@ -39,15 +39,6 @@ public class Item
         return weight;
     }
 
-    /**
-     * Set the weight of an item
-     *
-     * @param weight new value of weight
-     */
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
 
     /**
      * Get the name of an item
@@ -56,15 +47,6 @@ public class Item
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Set the name of an item
-     *
-     * @param name new name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -77,15 +59,6 @@ public class Item
     }
 
     /**
-     * Set the flavour text of an item
-     * 
-     * @param flavourText the lengthy description
-     */
-    public void setFlavourText(String flavourText) {
-        this.flavourText = flavourText;
-    }
-
-    /**
      * Get the value of ID
      *
      * @return the value of ID
@@ -93,14 +66,4 @@ public class Item
     public int getID() {
         return ID;
     }
-
-    /**
-     * Set the value of ID
-     *
-     * @param ID new value of ID
-     */
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
 }

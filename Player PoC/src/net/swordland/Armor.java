@@ -16,44 +16,7 @@ public class Armor extends Wearable
 
     private ArmorClass armorClass;
 
-    /**
-     * Get the value of armorClass
-     *
-     * @return the value of armorClass
-     */
-    public ArmorClass getArmorClass() {
-        return armorClass;
-    }
-
-    /**
-     * Set the value of armorClass
-     *
-     * @param armorClass new value of armorClass
-     */
-    public void setArmorClass(ArmorClass armorClass) {
-        this.armorClass = armorClass;
-    }
-
     private int defense;
-
-    /**
-     * Get the value of defense
-     *
-     * @return the value of defense
-     */
-    public int getDefense() {
-        return defense;
-    }
-
-    /**
-     * Set the value of defense
-     *
-     * @param defense new value of defense
-     */
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
     
     /**
      * Creates an armor with a specified weight, name, flavour text, maximum durability, current durability, material, armor class and defense modifier.
@@ -75,6 +38,24 @@ public class Armor extends Wearable
     }
 
     /**
+     * Get the value of armorClass
+     *
+     * @return the value of armorClass
+     */
+    public ArmorClass getArmorClass() {
+        return armorClass;
+    }
+
+    /**
+     * Get the value of defense
+     *
+     * @return the value of defense
+     */
+    public int getDefense() {
+        return defense;
+    }
+
+    /**
      *
      * @author Kazumi
      */
@@ -82,13 +63,18 @@ public class Armor extends Wearable
         /**
          * Light Leather Armor
          */
-        LLA, /**
+        LLA, 
+        /**
          * Heavy Leather Armor
-         */ HLA, /**
+         */ 
+        HLA, 
+        /**
          * Light Metal Armor
-         */ LMA, /**
+         */ 
+        LMA, 
+        /**
          * Heavy Metal Armor
-         */ HMA
-    }
-    
+         */ 
+        HMA
+    }    
 }

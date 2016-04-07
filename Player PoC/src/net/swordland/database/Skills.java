@@ -34,7 +34,7 @@ public final class Skills
         AllSkills.put("SIDx010101010103", new Skill(
                 "SIDx010101010103",
                 "OHS",
-                "Nova Ascention",
+                "Nova Ascension",
                 "After 9 vicious slashes you deal one final hit blow. Deals 525% normal damage per hit for the first 9, "
                         + "Last hit does 975% normal damage. ",
                 4,
