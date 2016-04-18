@@ -10,7 +10,7 @@ package net.swordland;
  *
  * @author Kazumi
  */
-public class PointOfInterest 
+public class Quest 
 {
 
 }

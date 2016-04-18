@@ -6,62 +6,78 @@
 
 package net.swordland;
 
+import java.util.TreeMap;
+
 /**
  *
  * @author Kazumi
  */
 public class Skill 
 {
-    private String ID;
-    private String type;
-    private String name;
-    private String description;
-    private int tier;
-    private int maxCooldown;
-    private int currCooldown;
-    private String[] childs;
-    private String parent;
+    private Weapon.WeaponArcheType weaponRequired;
     private int numHits;
-    private float range;
-    private Attack[] attacks;
+    private double damageMod[];
+    private TreeMap<Effect, Integer> effects;
+    private boolean finalAttack;
 
-    /**
-     *
-     * @param ID
-     * @param type
-     * @param name
-     * @param description
-     * @param tier
-     * @param maxCooldown
-     * @param childs
-     * @param parent
-     * @param numHits
-     * @param range
-     * @param attacks
-     */
-    public Skill(String ID, String type, String name, String description, int tier, int maxCooldown, String[] childs, String parent, int numHits, float range, Attack[] attacks) 
+    public Skill(Weapon.WeaponArcheType weaponRequired, int numHits, double normalDamageMod, TreeMap<Effect, Integer> effects, boolean finalAttack, double finalAttackDamageMod)
     {
-        this.ID = ID;
-        this.type = type;
-        this.name = name;
-        this.description = description;
-        this.tier = tier;
-        this.maxCooldown = maxCooldown;
-        this.currCooldown = 0;
-        this.childs = childs;
-        this.parent = parent;
+        this.damageMod = new double[2];
+        
+        this.weaponRequired = weaponRequired;
         this.numHits = numHits;
-        this.range = range;
-        this.attacks = attacks;
+        this.damageMod[0] = normalDamageMod;
+        this.damageMod[1] = finalAttackDamageMod;
+        this.effects = effects;
+        this.finalAttack = finalAttack;
+    }
+    
+    public Skill(Weapon.WeaponArcheType weaponRequired, int numHits, double normalDamageMod, TreeMap<Effect, Integer> effects)
+    {
+        this.damageMod = new double[1];
+        
+        this.weaponRequired = weaponRequired;
+        this.numHits = numHits;
+        this.damageMod[0] = normalDamageMod;
+        this.effects = effects;
+        this.finalAttack = false;
+    }
+    
+    public double getNormalDamageMod()
+    {
+        return damageMod[0];
     }
 
-    /**
-     *
-     */
-    public void coolDown() 
+    public int getNumHits()
     {
-        if (currCooldown != 0) {
-            currCooldown--;
-        }
+        return numHits;
     }
+
+    public TreeMap<Effect, Integer> getEffects()
+    {
+        return effects;
+    }
+
+    public Weapon.WeaponArcheType getWeaponRequired()
+    {
+        return weaponRequired;
+    }
+
+    public boolean hasFinalAttack()
+    {
+        return finalAttack;
+    }
+    
+    //FIXME: Custom hashing algorithm?
+    public int getHash()
+    {
+        return this.hashCode();
+    }
+
+    public double getFinalAttackDamageMod()
+    {
+        return damageMod[1];
+    }
+    
+    
 }

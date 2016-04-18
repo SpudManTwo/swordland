@@ -76,7 +76,7 @@ public class Items
     
     public static boolean addToItemPlayerMap(Item item, Player player)
     {
-        if (item == null || player == null)
+        if (item == null || player == null || !items.contains(item))
         {
             return false;
         }

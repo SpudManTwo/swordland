@@ -12,8 +12,34 @@ package net.swordland;
 public class Ring extends Item
 {
     
-    public Ring(int ID, int weight, String name, String flavourText) {
+    public Ring(int ID, int weight, String name, String flavourText) 
+    {
         super(ID, weight, name, flavourText);
+    }
+    
+    public void doEffect(Player owner)
+    {
+        switch (name)
+        {
+            case "RING_TEARSTONE_RED":
+            {
+                if (owner.getCurrHP()<=(owner.getMaxHP()/2))
+                {
+                    owner.addStatus(new Effect(1, Effect.EffectArcheType.ATTACK_UP));
+                }
+                break;
+            }
+            case "RING_TEARSTONE_BLUE":
+            {
+                if (owner.getCurrHP()<=(owner.getMaxHP()/2))
+                {
+                    owner.addStatus(new Effect(1, Effect.EffectArcheType.DEFENCE_UP));
+                }
+                break;
+            }
+            default:
+                throw new IllegalArgumentException(name + ": is not an implemented ring");
+        }
     }
     
 }

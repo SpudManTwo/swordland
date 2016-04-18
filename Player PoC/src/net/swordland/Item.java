@@ -12,10 +12,10 @@ package net.swordland;
  */
 public class Item 
 {
-    private int ID;
-    private int weight;
-    private String name;
-    private String flavourText;
+    protected int ID;
+    protected int weight;
+    protected String name;
+    protected String flavourText;
 
     /**
      * Creates an item with a specified weight, name and flavour text.

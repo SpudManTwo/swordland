@@ -6,31 +6,39 @@
 
 package net.swordland;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.TreeMap;
+import net.swordland.database.Items;
+import net.swordland.database.Locations;
 import net.swordland.database.Skills;
 
 /**
  * Describes a player entity.
  * @author Kazumi
  */
-public class Player
+public class Player extends Living
 {
-    private int level;
+    private long playerID;
     private int XP;
-    private int[] attribute;
-    private String name;
-    private Inventory inventory;
+    private int STR;
+    private int DEX;
+    private int CON;
+    private int INT;
+    private int WIS;
     private int col;
     private ArrayList<Skill> skills;
-    private Location location;
+    private ArrayList<Item> currentItems;
+    private Ring[] currentRings;
+    private PlayerHouse house;
+    private PlayerShop shop;
     
-    private int currHP;
-    private int maxHP;
     private int WLM;
     private int weight;
     
     /**
      * Creates a new player with all necessary parameters.
+     * @param cursor
      * @param level the level of the player
      * @param XP the player's amount of XP
      * @param STR the player's strength
@@ -38,78 +46,99 @@ public class Player
      * @param CON the player's constitution
      * @param INT the player's intelligence
      * @param WIS the player's wisdom
-     * @param inventory the player's state of the inventory
+     * @param status
      * @param name the name of the player
+     * @param visible
+     * @param playerID
      * @param col the amount of col in the player's pockets
      * @param skills the player's personal list of unlocked skills
-     * @param location the player's location
+     * @param currentItems
+     * @param currentRings
+     * @param leftHand
+     * @param currentLocation
+     * @param rightHand
+     * @param wornArmor
+     * @param playerHouse
+     * @param playerShop
      */
-    public Player(
+    public Player
+        (
+            Color cursor, 
             int level, 
             int XP, 
             int STR, 
             int DEX, 
             int CON, 
             int INT, 
-            int WIS, 
-            Inventory inventory, 
+            int WIS,  
+            TreeMap<Effect.EffectArcheType, Effect> status,
+            boolean visible,
             String name, 
+            long playerID,
             int col, 
             ArrayList<Skill> skills,
-            Location location)
+            ArrayList<Item> currentItems,
+            Ring[] currentRings,
+            Location currentLocation, 
+            Item leftHand, 
+            Item rightHand,
+            Armour wornArmor,
+            PlayerHouse playerHouse,
+            PlayerShop playerShop
+        )
     {
-        this.skills = new ArrayList<>();
-        this.attribute  = new int[5];
+        super(cursor, status, currentLocation, leftHand, rightHand, wornArmor, level, visible, name);
         
-        this.level = level;
+        this.skills = new ArrayList<>();
+        this.currentItems = new ArrayList<>();
+        this.currentRings = new Ring[10];
+        
+        this.playerID = playerID;
         this.XP = XP;
-        this.attribute[0] = STR;
-        this.attribute[1] = DEX;
-        this.attribute[2] = CON;
-        this.attribute[3] = INT;
-        this.attribute[4] = WIS;
-        this.inventory = inventory;
-        this.name = name;
+        this.STR = STR;
+        this.DEX = DEX;
+        this.CON = CON;
+        this.INT = INT;
+        this.WIS = WIS;
         this.col = col;
         this.skills = skills;
-        this.location = location;
+        this.currentItems = currentItems;
+        this.currentRings = currentRings;
+        this.house = playerHouse;
+        this.shop = playerShop;
         
-        this.currHP = this.maxHP = 10*attribute[2]*this.level;
-        this.WLM = 10*attribute[0]*this.level;
-        for (Weapon w : this.inventory.getCurrentWeapon())
-        {
-            this.weight += w.getWeight();
-        }
-        this.weight += this.inventory.getCurrentArmor().getWeight();
-        for (Item i : this.inventory.getCurrentItems())
-        {
-            this.weight += i.getWeight();
-        }        
+        this.currHP = this.maxHP = 10*this.CON*this.level;
+        this.WLM = 10*this.STR*this.level;       
     }
     
-    public Player(String name)
+    /**
+     * Creates a new player whom is ready to go on their quest to glory. One catch though, they are Level 1, have 100 Col and starting equipment.
+     *
+     * @param name
+     * @param playerID
+     */
+    public Player(String name, long playerID)
     {
-        this.skills = new ArrayList<>();
-        this.attribute  = new int[5];
+        super(Color.GREEN, new TreeMap<>(), Locations.ToBCentral(), null, null, null, 1, true, name);
         
-        this.level = 1;
+        this.skills = new ArrayList<>();
+        this.currentItems = new ArrayList<>();
+        this.currentRings = new Ring[10];
+        
+        this.playerID = playerID;
         this.XP = 0;
-        this.attribute[0] = 1;
-        this.attribute[1] = 1;
-        this.attribute[2] = 1;
-        this.attribute[3] = 1;
-        this.attribute[4] = 1;
-        this.inventory = new Inventory();
-        this.name = name;
+        this.STR = 1;
+        this.DEX = 1;
+        this.CON = 1;
+        this.INT = 1;
+        this.WIS = 1;
         this.col = 100;
         this.skills = Skills.getStartingSkills();
-        this.location = Location.ToBCentralPlaza();
+        this.house = null;
+        this.shop = null;
         
-        this.currHP = this.maxHP = 10*attribute[2]*this.level;
-        this.WLM = 10*attribute[0]*this.level;
-        this.inventory.getCurrentItems().stream().forEach((item) -> {
-            this.weight += item.getWeight();
-        });
+        this.currHP = this.maxHP = 10*this.CON*this.level;
+        this.WLM = 10*this.STR*this.level;
     }
     
     /**
@@ -145,85 +174,77 @@ public class Player
 
     public int getSTR() 
     {
-        return attribute[0];
+        return STR;
     }
     
     public int getDEX() 
     {
-        return attribute[1];
+        return DEX;
     }
     
     public int getCON() 
     {
-        return attribute[2];
+        return CON;
     }
     
     public int getINT() 
     {
-        return attribute[3];
+        return INT;
     }
     
     public int getWIS() 
     {
-        return attribute[4];
+        return WIS;
     }
     
     public void setSTR(int newSTR)
     {
-        attribute[0] = newSTR;
+        STR = newSTR;
     }
     
     public void setDEX(int newDEX)
     {
-        attribute[1] = newDEX;
+        DEX = newDEX;
     }
     
     public void setCON(int newCON)
     {
-        attribute[2] = newCON;
+        CON = newCON;
     }
     
     public void setINT(int newINT)
     {
-        attribute[3] = newINT;
+        INT = newINT;
     }
     
     public void setWIS(int newWIS)
     {
-        attribute[4] = newWIS;
+        WIS = newWIS;
     }
     
     public void addSTR(int amount)
     {
-        attribute[0] += amount;
+        STR += amount;
     }
     
     public void addDEX(int amount)
     {
-        attribute[1] += amount;
+        DEX += amount;
     }
     
     public void addCON(int amount)
     {
-        attribute[2] += amount;
+        CON += amount;
     }
     
     public void addINT(int amount)
     {
-        attribute[3] += amount;
+        INT += amount;
     }
     
     public void addWIS(int amount)
     {
-        attribute[4] += amount;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public int getLevel() {
-        return level;
+        WIS += amount;
     }
 
     public void setLevel(int level) {
@@ -232,11 +253,13 @@ public class Player
     
     public void addLevel()
     {
+        this.XP = 0;
         this.level++;
     }
     
     public void addLevel(int amount)
     {
+        this.XP = 0;
         for (int i=0; i<amount; i++)
         {
             this.level++;
@@ -255,51 +278,47 @@ public class Player
         this.skills.add(skill);
     }
 
-    public int getCurrHP() {
-        return currHP;
-    }
-
-    public void setCurrHP(int currHP) {
-        this.currHP = currHP;
-    }
-
-    public void remHP(int diffHP) {
-        this.currHP -= diffHP;
-        if (this.currHP <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void addHP(int diffHP) {
-        this.currHP += diffHP;
-        if (this.currHP > this.maxHP)
-        {
-            this.currHP = this.maxHP;
-        }
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
     public int getWLM() {
         return WLM;
     }
-    
-    public void registerPlayerInventory()
-    {
-        this.inventory.setPlayer(this);
-    }
 
     public Location getLocation() {
-        return location;
+        return currentLocation;
     }
 
     public int getWeight() {
         return weight;
     }
+
+    public int getXP()
+    {
+        return XP;
+    }
+
+    public ArrayList<Item> getCurrentItems()
+    {
+        return currentItems;
+    }
+
+    public Ring[] getCurrentRings()
+    {
+        return currentRings;
+    }
+    public boolean addItem(Item newItem)
+    {
+        if (newItem == null || !Items.addToItemPlayerMap(newItem, this))
+        {
+            return false;
+        }
+        return currentItems.add(newItem);        
+    }
+
+    public long getID()
+    {
+        return playerID;
+    }
     
+    @Override
     public void Die()
     {
         // THE END.

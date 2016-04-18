@@ -17,7 +17,7 @@ public class Weapon extends Wearable
     /**
      * The weapon's respective type. Use NONE in case of no weapon.
      */
-    private WeaponClass weaponClass;
+    private WeaponArcheType weaponArcheType;
     
     /**
      * The weapon's attack modifier. It adds to your strength to see how much damage you do.
@@ -39,13 +39,13 @@ public class Weapon extends Wearable
      * @param maxDurability The maximum durability of the weapon. 
      * @param currDurability The current durability of the weapon.
      * @param material The material the weapon is made of.
-     * @param weaponClass The weapon class.
+     * @param weaponArcheType The weapon class.
      * @param attack The damage modifier of the weapon.
      * @param range Multiplicative value to create exceptionally long or short weapons.
      */
-    public Weapon(int ID, int weight, String name, String flavourText, int maxDurability, int currDurability, Material material, WeaponClass weaponClass, int attack, float range) {
+    public Weapon(int ID, int weight, String name, String flavourText, int maxDurability, int currDurability, Material material, WeaponArcheType weaponArcheType, int attack, float range) {
         super(ID, weight, name, flavourText, maxDurability, currDurability, material);
-        this.weaponClass = weaponClass;
+        this.weaponArcheType = weaponArcheType;
         this.attack = attack;
         this.range = range;
     }
@@ -59,11 +59,11 @@ public class Weapon extends Wearable
         super(other.getID(),other.getWeight(),other.getName(),other.getFlavourText(),other.getMaxDurability(),other.getCurrDurability(),other.getMaterial());
         this.attack = other.getAttack();
         this.range = other.getRange();
-        this.weaponClass = other.getWeaponClass();
+        this.weaponArcheType = other.getWeaponArcheType();
     }
 
-    public WeaponClass getWeaponClass() {
-        return weaponClass;
+    public WeaponArcheType getWeaponArcheType() {
+        return weaponArcheType;
     }
 
     public int getAttack() {
@@ -78,7 +78,15 @@ public class Weapon extends Wearable
      *
      * @author Kazumi
      */
-    public static enum WeaponClass {
+    public static enum WeaponArcheType {
+        /**
+         * Any weapon
+         */
+        ANY,
+        /**
+         * No weapon at all
+         */
+        NONE,
         /**
          * One Handed Sword
          */
