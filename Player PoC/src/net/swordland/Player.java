@@ -33,7 +33,6 @@ public class Player extends Living
     private PlayerHouse house;
     private PlayerShop shop;
     
-    private int WLM;
     private int weight;
     
     /**
@@ -108,7 +107,6 @@ public class Player extends Living
         this.shop = playerShop;
         
         this.currHP = this.maxHP = 10*this.CON*this.level;
-        this.WLM = 10*this.STR*this.level;       
     }
     
     /**
@@ -138,7 +136,6 @@ public class Player extends Living
         this.shop = null;
         
         this.currHP = this.maxHP = 10*this.CON*this.level;
-        this.WLM = 10*this.STR*this.level;
     }
     
     /**
@@ -247,25 +244,6 @@ public class Player extends Living
         WIS += amount;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-    
-    public void addLevel()
-    {
-        this.XP = 0;
-        this.level++;
-    }
-    
-    public void addLevel(int amount)
-    {
-        this.XP = 0;
-        for (int i=0; i<amount; i++)
-        {
-            this.level++;
-        }
-    }
-
     public ArrayList<Skill> getSkills() {
         return skills;
     }
@@ -278,21 +256,8 @@ public class Player extends Living
         this.skills.add(skill);
     }
 
-    public int getWLM() {
-        return WLM;
-    }
-
-    public Location getLocation() {
-        return currentLocation;
-    }
-
     public int getWeight() {
         return weight;
-    }
-
-    public int getXP()
-    {
-        return XP;
     }
 
     public ArrayList<Item> getCurrentItems()

@@ -27,7 +27,8 @@ public class Living
     protected int level;
     protected boolean visible;
     protected String name;
-    protected Armour wornArmor;
+    protected Armour wornArmour;
+    protected int XP;
 
     public Living
         (
@@ -38,7 +39,7 @@ public class Living
             Location currentLocation, 
             Item leftHandItem, 
             Item rightHandItem,
-            Armour wornArmor,
+            Armour wornArmour,
             int level, 
             boolean visible, 
             String name
@@ -51,7 +52,7 @@ public class Living
         this.currentLocation = currentLocation;
         this.leftHand = leftHandItem;
         this.rightHand = rightHandItem;
-        this.wornArmor = wornArmor;
+        this.wornArmour = wornArmour;
         this.level = level;
         this.visible = visible;
         this.name = name;
@@ -75,7 +76,7 @@ public class Living
         this.currentLocation = currentLocation;
         this.leftHand = leftHand;
         this.rightHand = rightHand;
-        this.wornArmor = wornArmor;
+        this.wornArmour = wornArmor;
         this.level = level;
         this.visible = visible;
         this.name = name;
@@ -163,14 +164,14 @@ public class Living
         this.name = name;
     }
 
-    public Armour getWornArmor()
+    public Armour getWornArmour()
     {
-        return wornArmor;
+        return wornArmour;
     }
 
-    public void setWornArmor(Armour wornArmor)
+    public void setWornArmour(Armour wornArmour)
     {
-        this.wornArmor = wornArmor;
+        this.wornArmour = wornArmour;
     }
 
     public void remHP(int diffHP) 
@@ -212,6 +213,40 @@ public class Living
         {
             this.status.remove(status.getEffectArcheType());
         }
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+    
+    public void addLevel()
+    {
+        this.XP = 0;
+        this.level++;
+    }
+    
+    public void addLevel(int amount)
+    {
+        this.XP = 0;
+        for (int i=0; i<amount; i++)
+        {
+            this.level++;
+        }
+    }
+
+    public int getXP()
+    {
+        return XP;
+    }
+    
+    public void addXP(int amount)
+    {
+        this.XP += amount;
+    }
+    
+    public void setXP(int amount)
+    {
+        this.XP = amount;
     }
     
     public void Die()

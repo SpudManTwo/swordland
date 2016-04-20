@@ -55,8 +55,8 @@ public class Mob extends Living
     {
         ULTRA_RARE (0),
         SUPER_RARE (4),
-	RARE (9),
-	SEMI_RARE (14),
+	    RARE (9),
+	    SEMI_RARE (14),
         UNCOMMON (19),
         OCCASIONAL (24),
         COMMON (32),
